@@ -172,14 +172,14 @@ format.
 
 The TFRecord format consists of a set of sharded files where each entry is a serialized `tf.Example` proto. Each `tf.Example` proto contains the ImageNet image (JPEG encoded) as well as metadata such as label and bounding box information.
 
-We provide a single [script](datasets/download_and_preprocess_imagenet.sh) for
+We provide a single [script](datasets/download_and_convert_imagenet.sh) for
 downloading and converting ImageNet data to TFRecord format. Downloading and
 preprocessing the data may take several hours (up to half a day) depending on
 your network and computer speed. Please be patient.
 
-To begin, you will need to sign up for an account with [ImageNet]
-(http://image-net.org) to gain access to the data. Look for the sign up page,
-create an account and request an access key to download the data.
+To begin, you will need to sign up for an account with
+[ImageNet](http://image-net.org) to gain access to the data. Look for the sign
+up page, create an account and request an access key to download the data.
 
 After you have `USERNAME` and `PASSWORD`, you are ready to run our script. Make
 sure that your hard disk has at least 500 GB of free space for downloading and
