@@ -74,8 +74,12 @@ VALIDATION_TARBALL="ILSVRC2012_img_val.tar"
 OUTPUT_PATH="${OUTDIR}validation/"
 mkdir -p "${OUTPUT_PATH}"
 cd "${OUTDIR}/.."
-echo "Downloading ${VALIDATION_TARBALL} to ${OUTPUT_PATH}."
-wget -nd -c "${BASE_URL}/${VALIDATION_TARBALL}"
+if [ -e ${VALIDATION_TARBALL} ]; then
+  echo "Using cached copy of ${VALIDATION_TARBALL}"
+else
+  echo "Downloading ${VALIDATION_TARBALL} to ${OUTPUT_PATH}."
+  wget -nd -c -nc "${BASE_URL}/${VALIDATION_TARBALL}"
+fi
 tar xf "${VALIDATION_TARBALL}" -C "${OUTPUT_PATH}"
 
 # Download all images from the ImageNet 2012 train dataset.
@@ -83,8 +87,12 @@ TRAIN_TARBALL="ILSVRC2012_img_train.tar"
 OUTPUT_PATH="${OUTDIR}train/"
 mkdir -p "${OUTPUT_PATH}"
 cd "${OUTDIR}/.."
-echo "Downloading ${TRAIN_TARBALL} to ${OUTPUT_PATH}."
-wget -nd -c "${BASE_URL}/${TRAIN_TARBALL}"
+if [ -e ${TRAIN_TARBALL} ]; then
+  echo "Using cached copy of ${TRAIN_TARBALL}"
+else
+  echo "Downloading ${TRAIN_TARBALL} to ${OUTPUT_PATH}."
+  wget -nd -c -nc "${BASE_URL}/${TRAIN_TARBALL}"
+fi
 
 # Un-compress the individual tar-files within the train tar-file.
 echo "Uncompressing individual train tar-balls in the training data."
