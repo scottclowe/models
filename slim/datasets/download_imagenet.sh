@@ -76,7 +76,7 @@ if [ -e ${VALIDATION_TARBALL} ]; then
   echo "Using cached copy of ${VALIDATION_TARBALL}"
 else
   echo "Downloading ${VALIDATION_TARBALL} to ${OUTPUT_PATH}."
-  wget -nd -c "${BASE_URL}/${VALIDATION_TARBALL}"
+  wget -nd -c -nc "${BASE_URL}/${VALIDATION_TARBALL}"
 fi
 tar xf "${VALIDATION_TARBALL}" -C "${OUTPUT_PATH}"
 
@@ -89,7 +89,7 @@ if [ -e ${TRAIN_TARBALL} ]; then
   echo "Using cached copy of ${TRAIN_TARBALL}"
 else
   echo "Downloading ${TRAIN_TARBALL} to ${OUTPUT_PATH}."
-  wget -nd -c "${BASE_URL}/${TRAIN_TARBALL}"
+  wget -nd -c -nc "${BASE_URL}/${TRAIN_TARBALL}"
 fi
 
 # Un-compress the individual tar-files within the train tar-file.
