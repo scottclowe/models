@@ -54,8 +54,12 @@ BASE_URL="http://www.image-net.org/challenges/LSVRC/2012/nonpub"
 # See here for details: http://www.image-net.org/download-bboxes
 BOUNDING_BOX_ANNOTATIONS="${BASE_URL}/ILSVRC2012_bbox_train_v2.tar.gz"
 BBOX_TAR_BALL="${BBOX_DIR}/annotations.tar.gz"
-echo "Downloading bounding box annotations."
-wget "${BOUNDING_BOX_ANNOTATIONS}" -O "${BBOX_TAR_BALL}"
+if [ -e ${BBOX_TAR_BALL} ]; then
+  echo "Using cached copy of ${BBOX_TAR_BALL}"
+else
+  echo "Downloading bounding box annotations."
+  wget "${BOUNDING_BOX_ANNOTATIONS}" -O "${BBOX_TAR_BALL}"
+fi
 echo "Uncompressing bounding box annotations ..."
 tar xzf "${BBOX_TAR_BALL}" -C "${BBOX_DIR}"
 
@@ -68,8 +72,12 @@ VALIDATION_TARBALL="ILSVRC2012_img_val.tar"
 OUTPUT_PATH="${OUTDIR}validation/"
 mkdir -p "${OUTPUT_PATH}"
 cd "${OUTDIR}/.."
-echo "Downloading ${VALIDATION_TARBALL} to ${OUTPUT_PATH}."
-wget -nd -c "${BASE_URL}/${VALIDATION_TARBALL}"
+if [ -e ${VALIDATION_TARBALL} ]; then
+  echo "Using cached copy of ${VALIDATION_TARBALL}"
+else
+  echo "Downloading ${VALIDATION_TARBALL} to ${OUTPUT_PATH}."
+  wget -nd -c "${BASE_URL}/${VALIDATION_TARBALL}"
+fi
 tar xf "${VALIDATION_TARBALL}" -C "${OUTPUT_PATH}"
 
 # Download all images from the ImageNet 2012 train dataset.
@@ -77,8 +85,12 @@ TRAIN_TARBALL="ILSVRC2012_img_train.tar"
 OUTPUT_PATH="${OUTDIR}train/"
 mkdir -p "${OUTPUT_PATH}"
 cd "${OUTDIR}/.."
-echo "Downloading ${TRAIN_TARBALL} to ${OUTPUT_PATH}."
-wget -nd -c "${BASE_URL}/${TRAIN_TARBALL}"
+if [ -e ${TRAIN_TARBALL} ]; then
+  echo "Using cached copy of ${TRAIN_TARBALL}"
+else
+  echo "Downloading ${TRAIN_TARBALL} to ${OUTPUT_PATH}."
+  wget -nd -c "${BASE_URL}/${TRAIN_TARBALL}"
+fi
 
 # Un-compress the individual tar-files within the train tar-file.
 echo "Uncompressing individual train tar-balls in the training data."
